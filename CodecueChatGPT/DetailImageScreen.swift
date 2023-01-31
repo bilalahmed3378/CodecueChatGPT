@@ -7,12 +7,20 @@
 
 import SwiftUI
 import UIKit
+import Foundation
+import Kingfisher
 
 struct DetailImageScreen: View {
     @Environment(\.presentationMode) var presentationMode
     @State var qureytext = ""
     @State private var showShareSheet = false
+    @State private var imageUrl: String = ""
+    @State var imageList : [DALLEData] = []
+    @State private var isLoading = false
+
+
     var body: some View {
+        
         ZStack{
             AppColors.appBackgroundColor
                 .ignoresSafeArea(.all)
@@ -51,42 +59,18 @@ struct DetailImageScreen: View {
                 .padding(.top,20)
                 
                 ScrollView(.vertical, showsIndicators: false){
-                    
-                    LazyVGrid(columns: [GridItem(.flexible()),GridItem(.flexible())]){
-                        
-                        ForEach(0...10, id : \.self){index in
+                    if(!self.imageList.isEmpty){
+
+                        LazyVGrid(columns: [GridItem(.flexible()),GridItem(.flexible())]){
                             
-                            VStack{
+                            ForEach(self.imageList.indices, id : \.self){index in
                                 
-                                VStack{
-                                    Image(uiImage: UIImage(named: AppImages.AiImage)!)
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fill)
-                                        .frame(width: 150 , height: 150)
-                                        .cornerRadius(8)
-                                        .padding(.top,20)
-                                    
-                                
-                                        Button(action: {
-                                            
-                                        }, label: {
-                                            Image(systemName: "square.and.arrow.up")
-                                                .resizable()
-                                                .aspectRatio(contentMode: .fill)
-                                                .frame(width: 24 , height: 24)
-                                                .foregroundColor(.white)
-                                                .padding(.top,5)
-                                        })
-                                       
-                                        
-                                    
-                                    
-                                }
-                                
+                                ImagesCard(imageModel: self.imageList[index])
                             }
                         }
+                        
                     }
-                    
+                   
                     
                 }
                 
@@ -96,12 +80,24 @@ struct DetailImageScreen: View {
                         .padding(15)
                         .background(RoundedRectangle(cornerRadius: 10).fill(Color.white))
                     
-                    Image(systemName: "paperplane")
-                        .resizable()
-                        .aspectRatio( contentMode: .fit)
-                        .frame(width: 24, height: 24)
-                        .foregroundColor(.white)
-                        .padding(.leading,5)
+                    
+                    if isLoading {
+                       ProgressView()
+                            .foregroundColor(.white)
+                            .padding(.leading,5)
+                    }else{
+                        Button(action: {
+                            generateImage(imageList: self.$imageList)
+                        }, label: {
+                            Image(systemName: "paperplane")
+                                .resizable()
+                                .aspectRatio( contentMode: .fit)
+                                .frame(width: 24, height: 24)
+                                .foregroundColor(.white)
+                                .padding(.leading,5)
+                        })
+                    }
+                  
                     
                 }
                 
@@ -111,6 +107,123 @@ struct DetailImageScreen: View {
         }
         .navigationBarHidden(true)
     }
+    
+    private func generateImage(imageList: Binding<[DALLEData]>) {
+        isLoading = true
+        let apiKey = "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"
+        let description = qureytext
+        let request = generateImageRequest(apiKey: apiKey, description: description)
+
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let data = data {
+                do {
+                    let result = try JSONDecoder().decode(DALLEResult.self, from: data)
+                    DispatchQueue.main.async {
+                        
+                        if (!result.data.isEmpty){
+                            imageList.wrappedValue.removeAll()
+                            imageList.wrappedValue.append(contentsOf: result.data)
+                            
+                            
+                        }
+//                        self.imageUrl = result.data[0].url
+                    }
+                } catch {
+                    print("Failed to decode response: \(error)")
+                }
+                
+                let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+                           print(responseJSON)
+            }
+            self.isLoading = false
+        }.resume()
+        self.qureytext = ""
+    }
+
+    private func generateImageRequest(apiKey: String, description: String) -> URLRequest {
+        let endpoint = "https://api.openai.com/v1/images/generations"
+        let request = NSMutableURLRequest(url: URL(string: endpoint)!)
+        
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+        request.httpMethod = "POST"
+        request.httpBody = """
+            {
+                "model": "image-alpha-001",
+                "prompt": "\(description)",
+                "num_images":10,
+                "size":"1024x1024"
+            }
+            """.data(using: .utf8)
+
+        return request as URLRequest
+    }
 }
 
 
+struct DALLEResult: Decodable {
+    let data: [DALLEData]
+}
+
+struct DALLEData: Decodable {
+    let url: String
+    
+}
+
+
+struct ImagesCard : View{
+    
+    var imageModel : DALLEData
+    
+    @State private var showShareSheet = false
+
+    
+    var body: some View{
+        
+        VStack{
+        
+                VStack{
+                    KFImage(URL(string: imageModel.url))
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 150 , height: 150)
+                        .cornerRadius(8)
+                        .padding(.top,20)
+                    
+                
+                    HStack{
+                        
+                        Button(action: {
+                            self.showShareSheet = true
+                            
+                        }, label: {
+                            ShareLink(item: self.imageModel.url){
+                                Label("", systemImage: "square.and.arrow.up")
+                                    .foregroundColor(.white)
+
+                            }
+                        })
+                        
+//                        Button(action: {
+//
+//                        }, label: {
+//                            Image(systemName: "square.and.arrow.down")
+//                                .resizable()
+//                                .aspectRatio(contentMode: .fill)
+//                                .frame(width: 20 , height: 20)
+//                                .foregroundColor(.white)
+//
+//                        })
+                       
+                    }
+                    
+                    
+                }
+                
+        }
+    }
+//    func saveImage() {
+//        let image = UIImage(named: imageModel.url)!
+//        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+//    }
+}

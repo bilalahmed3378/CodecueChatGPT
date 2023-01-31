@@ -203,8 +203,10 @@ struct Message : View{
                         Button(action: {
                             self.showShareSheet = true
                         }, label: {
-                            ShareLink(item: self.questionAnswer.answer.text ?? "")
-                                .foregroundColor(AppColors.appBackgroundColor)
+                            ShareLink(item: self.questionAnswer.answer.text ?? ""){
+                                Label("", systemImage: "square.and.arrow.up")
+                                    .foregroundColor(AppColors.appBackgroundColor)
+                            }
                         })
                     
                         

@@ -153,7 +153,7 @@ func generateText(prompt: String, completion: @escaping (Result<String, Error>) 
     
     let parameters = [
         "prompt": prompt,
-        "max_tokens": 128,
+        "max_tokens": 2000,
         "temperature": 0.5,
         "model" : "text-davinci-001"
     ] as [String : Any]
@@ -192,3 +192,63 @@ func generateText(prompt: String, completion: @escaping (Result<String, Error>) 
 }
 
 
+
+//import Foundation
+//import SwiftUI
+//
+//
+//
+//struct DALLEImage: View {
+//    @State private var imageUrl: String? = nil
+//
+//    var body: some View {
+//        if let imageUrl = imageUrl {
+//            return AnyView(
+//                Image(uiImage: UIImage(contentsOf: URL(string: imageUrl)!)!)
+//                    .resizable()
+//            )
+//        } else {
+//            generateImage()
+//            return AnyView(
+//                Text("Loading image...")
+//            )
+//        }
+//    }
+//
+//    private func generateImage() {
+//        let apiKey = "your_api_key_here"
+//        let description = "a red apple"
+//        let request = generateImageRequest(apiKey: apiKey, description: description)
+//
+//        URLSession.shared.dataTask(with: request) { data, response, error in
+//            if let data = data {
+//                do {
+//                    let result = try JSONDecoder().decode(DALLEResult.self, from: data)
+//                    DispatchQueue.main.async {
+//                        self.imageUrl = result.data[0].url
+//                    }
+//                } catch {
+//                    print("Failed to decode response: \(error)")
+//                }
+//            }
+//        }.resume()
+//    }
+//
+//    private func generateImageRequest(apiKey: String, description: String) -> URLRequest {
+//        let endpoint = "https://api.openai.com/v1/images/generations"
+//        let request = NSMutableURLRequest(url: URL(string: endpoint)!)
+//
+//        request.addValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+//        request.httpMethod = "POST"
+//        request.httpBody = """
+//            {
+//                "model": "image-alpha-001",
+//                "prompt": "\(description)",
+//                "num_images":1,
+//                "size":"1024x1024"
+//            }
+//            """.data(using: .utf8)
+//
+//        return request as URLRequest
+//    }
+//}
