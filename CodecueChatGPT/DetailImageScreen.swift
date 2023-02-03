@@ -17,7 +17,11 @@ struct DetailImageScreen: View {
     @State private var imageUrl: String = ""
     @State var imageList : [DALLEData] = []
     @State private var isLoading = false
-
+    
+    @State private var showImageView  : Bool = false
+    @State private var imagesUrlsList  : [String] = []
+    @State private var selectionImageInPreview = 0
+   
 
     var body: some View {
         
@@ -48,31 +52,48 @@ struct DetailImageScreen: View {
                     
                     Spacer()
                     
-//                    Image(systemName: "plus.app.fill")
-//                        .resizable()
-//                        .aspectRatio(contentMode: .fit)
-//                        .foregroundColor(.white)
-//                        .frame(width: 20, height: 20)
-                    
+                 
                     
                 }
                 .padding(.top,20)
                 
-                ScrollView(.vertical, showsIndicators: false){
-                    if(!self.imageList.isEmpty){
-
+                
+                if(self.isLoading){
+                    ScrollView(.vertical , showsIndicators: false){
+                        
                         LazyVGrid(columns: [GridItem(.flexible()),GridItem(.flexible())]){
                             
-                            ForEach(self.imageList.indices, id : \.self){index in
+                            ForEach(0...10, id:\.self){ index in
                                 
-                                ImagesCard(imageModel: self.imageList[index])
+                                ShimmerView(cornerRadius: 10, fill: .gray.opacity(0.5))
+                                    .frame(width: 150, height: 150)
+                                    .padding(.top,20)
+                                
                             }
                         }
+                    }
+                    .clipped()
+                }
+                else{
+                    
+                    ScrollView(.vertical, showsIndicators: false){
+                        if(!self.imageList.isEmpty){
+
+                            LazyVGrid(columns: [GridItem(.flexible()),GridItem(.flexible())]){
+                                
+                                ForEach(self.imageList.indices, id : \.self){index in
+                                    
+                                    ImagesCard(imageModel: self.imageList[index], showImageView: self.$showImageView, imagesUrlsList: self.$imagesUrlsList, selectionImageInPreview: self.$selectionImageInPreview )
+                                        
+                                }
+                            }
+                            
+                        }
+                       
                         
                     }
-                   
-                    
                 }
+               
                 
                 HStack{
                     TextField("Open AI Waiting for your query", text: $qureytext)
@@ -86,16 +107,23 @@ struct DetailImageScreen: View {
                             .foregroundColor(.white)
                             .padding(.leading,5)
                     }else{
-                        Button(action: {
-                            generateImage(imageList: self.$imageList)
-                        }, label: {
-                            Image(systemName: "paperplane")
-                                .resizable()
-                                .aspectRatio( contentMode: .fit)
-                                .frame(width: 24, height: 24)
-                                .foregroundColor(.white)
-                                .padding(.leading,5)
-                        })
+                        
+                      
+                            Button(action: {
+                                generateImage(imageList: self.$imageList)
+                            }, label: {
+                                Image(systemName: "paperplane")
+                                    .resizable()
+                                    .aspectRatio( contentMode: .fit)
+                                    .frame(width: 24, height: 24)
+                                    .foregroundColor(.white)
+                                    .padding(.leading,5)
+                                    .rotationEffect(self.qureytext != "" ? .degrees(0) : .degrees(40))
+                            })
+                        
+                        
+                        
+                        
                     }
                   
                     
@@ -104,6 +132,10 @@ struct DetailImageScreen: View {
             }
             .padding(.leading,20)
             .padding(.trailing,20)
+            
+            ImageViewer(imageURLs: self.$imagesUrlsList, selected : self.$selectionImageInPreview  , viewerShown: self.$showImageView, caption: nil, closeButtonTopRight: true)
+            
+           
         }
         .navigationBarHidden(true)
     }
@@ -173,11 +205,25 @@ struct DALLEData: Decodable {
 
 struct ImagesCard : View{
     
-    var imageModel : DALLEData
     
     @State private var showShareSheet = false
+    
+    var imageModel : DALLEData
 
     
+    @Binding var showImageView  : Bool
+    @Binding var imagesUrlsList  : [String]
+    @Binding var selectionImageInPreview : Int
+    
+    init(imageModel : DALLEData, showImageView: Binding<Bool>, imagesUrlsList: Binding<[String]>, selectionImageInPreview: Binding<Int> ) {
+        self.imageModel = imageModel
+        self._showImageView = showImageView
+        self._imagesUrlsList = imagesUrlsList
+        self._selectionImageInPreview = selectionImageInPreview
+    }
+  
+    
+   
     var body: some View{
         
         VStack{
@@ -189,6 +235,12 @@ struct ImagesCard : View{
                         .frame(width: 150 , height: 150)
                         .cornerRadius(8)
                         .padding(.top,20)
+                        .onTapGesture{
+                            self.imagesUrlsList.removeAll()
+                            self.imagesUrlsList.append(self.imageModel.url )
+                            self.selectionImageInPreview = 0
+                            self.showImageView = true
+                        }
                     
                 
                     HStack{
@@ -219,6 +271,7 @@ struct ImagesCard : View{
                     
                     
                 }
+            
                 
         }
     }

@@ -16,8 +16,11 @@
 		5936696A2987A9840087F66E /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 593669692987A9840087F66E /* HomeScreen.swift */; };
 		5936696D2987A9E60087F66E /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5936696C2987A9E60087F66E /* AppColors.swift */; };
 		594687262988FF1300D93B5D /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 594687252988FF1300D93B5D /* Kingfisher */; };
+		595E998E298A2E81006475FE /* Shimmer in Frameworks */ = {isa = PBXBuildFile; productRef = 595E998D298A2E81006475FE /* Shimmer */; };
+		595E9990298A2F13006475FE /* Shimmer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595E998F298A2F13006475FE /* Shimmer.swift */; };
 		59909D062987E137000E4C24 /* DetailImageScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59909D052987E137000E4C24 /* DetailImageScreen.swift */; };
 		59A6BA5E2987D49200418350 /* DetailTextScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A6BA5D2987D49200418350 /* DetailTextScreen.swift */; };
+		59C300F6298D367300F93CFF /* ImageViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C300F5298D367300F93CFF /* ImageViewer.swift */; };
 		59D31BED2987AD830070EC22 /* AppImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D31BEC2987AD830070EC22 /* AppImages.swift */; };
 /* End PBXBuildFile section */
 
@@ -30,8 +33,10 @@
 		593669672987A84C0087F66E /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
 		593669692987A9840087F66E /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
 		5936696C2987A9E60087F66E /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
+		595E998F298A2F13006475FE /* Shimmer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shimmer.swift; sourceTree = "<group>"; };
 		59909D052987E137000E4C24 /* DetailImageScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailImageScreen.swift; sourceTree = "<group>"; };
 		59A6BA5D2987D49200418350 /* DetailTextScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTextScreen.swift; sourceTree = "<group>"; };
+		59C300F5298D367300F93CFF /* ImageViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewer.swift; sourceTree = "<group>"; };
 		59D31BEC2987AD830070EC22 /* AppImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppImages.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -40,6 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				595E998E298A2E81006475FE /* Shimmer in Frameworks */,
 				594687262988FF1300D93B5D /* Kingfisher in Frameworks */,
 				593064C22988340D0065ED20 /* Alamofire in Frameworks */,
 			);
@@ -93,6 +99,8 @@
 			children = (
 				5936696C2987A9E60087F66E /* AppColors.swift */,
 				59D31BEC2987AD830070EC22 /* AppImages.swift */,
+				595E998F298A2F13006475FE /* Shimmer.swift */,
+				59C300F5298D367300F93CFF /* ImageViewer.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -116,6 +124,7 @@
 			packageProductDependencies = (
 				593064C12988340D0065ED20 /* Alamofire */,
 				594687252988FF1300D93B5D /* Kingfisher */,
+				595E998D298A2E81006475FE /* Shimmer */,
 			);
 			productName = CodecueChatGPT;
 			productReference = 593669562987A7CB0087F66E /* CodecueChatGPT.app */;
@@ -148,6 +157,7 @@
 			packageReferences = (
 				593064C02988340D0065ED20 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				594687242988FF1300D93B5D /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				595E998C298A2E81006475FE /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */,
 			);
 			productRefGroup = 593669572987A7CB0087F66E /* Products */;
 			projectDirPath = "";
@@ -178,7 +188,9 @@
 				59909D062987E137000E4C24 /* DetailImageScreen.swift in Sources */,
 				5936696A2987A9840087F66E /* HomeScreen.swift in Sources */,
 				59D31BED2987AD830070EC22 /* AppImages.swift in Sources */,
+				59C300F6298D367300F93CFF /* ImageViewer.swift in Sources */,
 				593669682987A84C0087F66E /* SplashScreen.swift in Sources */,
+				595E9990298A2F13006475FE /* Shimmer.swift in Sources */,
 				5936695C2987A7CB0087F66E /* ContentView.swift in Sources */,
 				5936696D2987A9E60087F66E /* AppColors.swift in Sources */,
 				59A6BA5E2987D49200418350 /* DetailTextScreen.swift in Sources */,
@@ -399,6 +411,14 @@
 				kind = branch;
 			};
 		};
+		595E998C298A2E81006475FE /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/markiv/SwiftUI-Shimmer.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -411,6 +431,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 594687242988FF1300D93B5D /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		595E998D298A2E81006475FE /* Shimmer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 595E998C298A2E81006475FE /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */;
+			productName = Shimmer;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

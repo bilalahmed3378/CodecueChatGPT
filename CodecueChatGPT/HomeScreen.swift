@@ -12,6 +12,8 @@ struct HomeScreen: View {
     @State var description = ""
     @State var toDetail : Bool = false
     @State var toImageDetail : Bool = false
+    @State var showButtons : Bool = false
+
 
     var body: some View {
         ZStack{
@@ -29,90 +31,61 @@ struct HomeScreen: View {
                 
                 Spacer()
                 
-                NavigationLink(destination: DetailTextScreen(), isActive: self.$toDetail){
-                    HStack{
-                        Image(systemName: "text.bubble")
-                            .resizable()
-                            .aspectRatio( contentMode: .fit)
-                            .frame(width: 30, height: 30)
-                            .foregroundColor(.white)
-                            .padding(.leading,5)
-
-                        
-                        Text("Text Completion - OpenAI")
-                            .foregroundColor(.white)
-                            .padding(.leading,5)
-                        
-                        Spacer()
-                        
-                    }
-                    .padding()
-                    .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.appBackgroundColor).shadow(color: .black, radius: 10).opacity(0.5))
-                }
                 
                 
-                NavigationLink(destination: DetailImageScreen(), isActive: self.$toImageDetail){
-                    HStack{
-                        Image(systemName: "photo")
-                            .resizable()
-                            .aspectRatio( contentMode: .fit)
-                            .frame(width: 30, height: 30)
-                            .foregroundColor(.white)
-                            .padding(.leading,5)
+                if(self.showButtons){
+                    NavigationLink(destination: DetailTextScreen(), isActive: self.$toDetail){
+                        HStack{
+                            Image(systemName: "text.bubble")
+                                .resizable()
+                                .aspectRatio( contentMode: .fit)
+                                .frame(width: 30, height: 30)
+                                .foregroundColor(.white)
+                                .padding(.leading,5)
 
-                        
-                        Text("Image Generation - OpenAI")
-                            .foregroundColor(.white)
-                            .padding(.leading,5)
-                        
-                        Spacer()
-                        
+                            
+                            Text("Text Completion - OpenAI")
+                                .foregroundColor(.white)
+                                .padding(.leading,5)
+                            
+                            Spacer()
+                            
+                        }
+                        .padding()
+                        .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.appBackgroundColor).shadow(color: .black, radius: 10).opacity(0.5))
                     }
-                    .padding()
-                    .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.appBackgroundColor).shadow(color: .black, radius: 10).opacity(0.5))
-                    .padding(.top,20)
+                    
+                    
+                    NavigationLink(destination: DetailImageScreen(), isActive: self.$toImageDetail){
+                        HStack{
+                            Image(systemName: "photo")
+                                .resizable()
+                                .aspectRatio( contentMode: .fit)
+                                .frame(width: 30, height: 30)
+                                .foregroundColor(.white)
+                                .padding(.leading,5)
+
+                            
+                            Text("Image Generation - OpenAI")
+                                .foregroundColor(.white)
+                                .padding(.leading,5)
+                            
+                            Spacer()
+                            
+                        }
+                        .padding()
+                        .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.appBackgroundColor).shadow(color: .black, radius: 10).opacity(0.5))
+                        .padding(.top,20)
+                    }
+                  
+                    
+                    Spacer()
+                    Spacer()
+                
                 }
+                   
+
               
-                
-                Spacer()
-                Spacer()
-
-//                HStack{
-//                    Text("Ask me anything")
-//                        .foregroundColor(.white)
-//
-//                    Spacer()
-//
-//                }
-//
-//                TextEditor(text: $description)
-//                  .foregroundColor(AppColors.appBackgroundColor)
-//                  .padding()
-//                  .background(.white)
-//                  .cornerRadius(10)
-//                  .frame( height: 200)
-//                  .navigationTitle("Your Query")
-//                  .overlay(
-//                    RoundedRectangle(cornerRadius: 10)
-//                      .stroke(Color.white, lineWidth: 2)
-//                  )
-//
-//                Spacer()
-//
-//                NavigationLink(destination: DetailScreen(), isActive: self.$toDetail, label: {
-//                    HStack{
-//                        Spacer()
-//                        Text("Find Answer")
-//                            .foregroundColor(AppColors.appBackgroundColor)
-//
-//                        Spacer()
-//                    }
-//                    .padding()
-//                    .background(Color.white)
-//                    .cornerRadius(10)
-//                    .shadow(radius: 10)
-//                    .padding(.bottom,20)
-//                })
              
                 
             }
@@ -121,6 +94,16 @@ struct HomeScreen: View {
             
         }
         .navigationBarHidden(true)
+        .onAppear{
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
+                DispatchQueue.global(qos: .background).async {
+                    withAnimation{
+                        self.showButtons = true
+                    }
+                }
+            })
+        }
        
 
     }

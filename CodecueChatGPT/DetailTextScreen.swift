@@ -65,30 +65,58 @@ struct DetailTextScreen: View {
                     }
                     .padding(.top,20)
                     .padding(.bottom,10)
-                                        
                     
-                    ScrollView(.vertical, showsIndicators: false){
-                        
-                        LazyVStack{
+                    if(self.isLoading){
+                        ScrollView(.vertical , showsIndicators: false){
                             
-                            if(!self.messageList.isEmpty){
-                                LazyVStack{
-                                    ForEach(self.messageList.indices, id:\.self){index in
-                                        
-                                        Message(questionAnswer: self.messageList[index])
-                                      
-                                    }
-                                }
-                               
+                            ForEach(0...10, id:\.self){ index in
+                                
+                                ShimmerView(cornerRadius: 10, fill: .gray.opacity(0.5))
+                                    .frame(width: (UIScreen.screenWidth-40), height: 140)
+                                    .padding(.top,20)
+                                
                             }
                             
                         }
-                        .rotationEffect(.degrees(180))
+                        .clipped()
+                    }
+                    
+                                        
+                    else{
+                        
+                        if(!self.messageList.isEmpty){
+                            ScrollView(.vertical, showsIndicators: false){
+                                
+                                LazyVStack{
+                                    
+                                    LazyVStack{
+                                        ForEach(self.messageList.indices, id:\.self){index in
+                                            
+                                            Message(questionAnswer: self.messageList[index])
+                                            
+                                        }
+                                    }
+                                     
+                                }
+                                .rotationEffect(.degrees(180))
+                                
+                                
+                            }
+                            .rotationEffect(.degrees(180))
+                        }
+                        else{
+                            Spacer()
+                            Image(uiImage: UIImage(named: AppImages.appLogo)!)
+                                .resizable()
+                                .aspectRatio( contentMode: .fit)
+                                .frame(height: 200)
+                                .padding(.bottom,30)
+                            Spacer()
+                        }
                         
                         
                     }
-                    .rotationEffect(.degrees(180))
-                    
+                  
                     
                     HStack{
                         
@@ -105,20 +133,22 @@ struct DetailTextScreen: View {
                         }
                         else{
                             
-                            Button(action: generate, label: {
+                                Button(action: generate, label: {
+                                    
+                                    
+                                    Image(systemName: "paperplane")
+                                        .resizable()
+                                        .aspectRatio( contentMode: .fit)
+                                        .frame(width: 24, height: 24)
+                                        .foregroundColor(.white)
+                                        .padding(.leading,5)
+                                        .rotationEffect(self.qureytext != "" ? .degrees(0) : .degrees(40))
+
+                                })
+                                .disabled(isLoading)
+                            
                                 
-                                Image(systemName: "paperplane")
-                                    .resizable()
-                                    .aspectRatio( contentMode: .fit)
-                                    .frame(width: 24, height: 24)
-                                    .foregroundColor(.white)
-                                    .padding(.leading,5)
-                                   
-                                   
-                            })
-                            .disabled(isLoading)
-                            
-                            
+                              
                         }
                         
                     }
@@ -250,3 +280,6 @@ struct Message : View{
        
     }
 }
+
+
+
