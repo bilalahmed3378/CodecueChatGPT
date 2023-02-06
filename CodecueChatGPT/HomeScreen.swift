@@ -7,12 +7,16 @@
 
 import SwiftUI
 import Foundation
+import GoogleMobileAds
+import UIKit
 
 struct HomeScreen: View {
     @State var description = ""
     @State var toDetail : Bool = false
     @State var toImageDetail : Bool = false
     @State var showButtons : Bool = false
+
+    @EnvironmentObject var adVM: AdsViewModel
 
 
     var body: some View {
@@ -29,12 +33,18 @@ struct HomeScreen: View {
                     .frame(height: 200)
                     .padding(.bottom,30)
                 
+                
                 Spacer()
-                
-                
                 
                 if(self.showButtons){
                     NavigationLink(destination: DetailTextScreen(), isActive: self.$toDetail){
+                        EmptyView()
+                    }
+                    
+                    Button(action: {
+                        self.toDetail = true
+                        self.adVM.showInterstitial = true
+                    }, label: {
                         HStack{
                             Image(systemName: "text.bubble")
                                 .resizable()
@@ -53,7 +63,9 @@ struct HomeScreen: View {
                         }
                         .padding()
                         .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.appBackgroundColor).shadow(color: .black, radius: 10).opacity(0.5))
-                    }
+                    
+                    })
+                      
                     
                     
                     NavigationLink(destination: DetailImageScreen(), isActive: self.$toImageDetail){
@@ -79,13 +91,15 @@ struct HomeScreen: View {
                     }
                   
                     
-                    Spacer()
-                    Spacer()
+                  
                 
                 }
                    
 
-              
+                Spacer()
+
+                BannerWrapper()
+
              
                 
             }
@@ -235,3 +249,22 @@ func generateText(prompt: String, completion: @escaping (Result<String, Error>) 
 //        return request as URLRequest
 //    }
 //}
+
+
+final private class BannerVC: UIViewControllerRepresentable  {
+
+    func makeUIViewController(context: Context) -> UIViewController {
+        let view = GADBannerView(adSize: GADPortraitAnchoredAdaptiveBannerAdSizeWithWidth(320))
+
+        let viewController = UIViewController()
+        view.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        view.rootViewController = viewController
+        viewController.view.addSubview(view)
+        viewController.view.frame = CGRect(origin: .zero, size: GADPortraitAnchoredAdaptiveBannerAdSizeWithWidth(320).size)
+        view.load(GADRequest())
+
+        return viewController
+    }
+
+    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
+}

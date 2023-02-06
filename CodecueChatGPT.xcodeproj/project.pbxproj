@@ -22,6 +22,8 @@
 		59A6BA5E2987D49200418350 /* DetailTextScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A6BA5D2987D49200418350 /* DetailTextScreen.swift */; };
 		59C300F6298D367300F93CFF /* ImageViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C300F5298D367300F93CFF /* ImageViewer.swift */; };
 		59D31BED2987AD830070EC22 /* AppImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D31BEC2987AD830070EC22 /* AppImages.swift */; };
+		59EDAF162990E64C00266026 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 59EDAF152990E64C00266026 /* GoogleMobileAds */; };
+		59EDAF192990E68D00266026 /* AdMob.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EDAF182990E68D00266026 /* AdMob.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +40,8 @@
 		59A6BA5D2987D49200418350 /* DetailTextScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTextScreen.swift; sourceTree = "<group>"; };
 		59C300F5298D367300F93CFF /* ImageViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewer.swift; sourceTree = "<group>"; };
 		59D31BEC2987AD830070EC22 /* AppImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppImages.swift; sourceTree = "<group>"; };
+		59EDAF182990E68D00266026 /* AdMob.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdMob.swift; sourceTree = "<group>"; };
+		59EDAF1A2990E82300266026 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				59EDAF162990E64C00266026 /* GoogleMobileAds in Frameworks */,
 				595E998E298A2E81006475FE /* Shimmer in Frameworks */,
 				594687262988FF1300D93B5D /* Kingfisher in Frameworks */,
 				593064C22988340D0065ED20 /* Alamofire in Frameworks */,
@@ -73,6 +78,8 @@
 		593669582987A7CB0087F66E /* CodecueChatGPT */ = {
 			isa = PBXGroup;
 			children = (
+				59EDAF1A2990E82300266026 /* Info.plist */,
+				59EDAF172990E68D00266026 /* Google Admob integration */,
 				5936696B2987A9AE0087F66E /* Resources */,
 				593669692987A9840087F66E /* HomeScreen.swift */,
 				59A6BA5D2987D49200418350 /* DetailTextScreen.swift */,
@@ -105,6 +112,14 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		59EDAF172990E68D00266026 /* Google Admob integration */ = {
+			isa = PBXGroup;
+			children = (
+				59EDAF182990E68D00266026 /* AdMob.swift */,
+			);
+			path = "Google Admob integration";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -125,6 +140,7 @@
 				593064C12988340D0065ED20 /* Alamofire */,
 				594687252988FF1300D93B5D /* Kingfisher */,
 				595E998D298A2E81006475FE /* Shimmer */,
+				59EDAF152990E64C00266026 /* GoogleMobileAds */,
 			);
 			productName = CodecueChatGPT;
 			productReference = 593669562987A7CB0087F66E /* CodecueChatGPT.app */;
@@ -158,6 +174,7 @@
 				593064C02988340D0065ED20 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				594687242988FF1300D93B5D /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				595E998C298A2E81006475FE /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */,
+				59EDAF142990E64C00266026 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
 			);
 			productRefGroup = 593669572987A7CB0087F66E /* Products */;
 			projectDirPath = "";
@@ -192,6 +209,7 @@
 				593669682987A84C0087F66E /* SplashScreen.swift in Sources */,
 				595E9990298A2F13006475FE /* Shimmer.swift in Sources */,
 				5936695C2987A7CB0087F66E /* ContentView.swift in Sources */,
+				59EDAF192990E68D00266026 /* AdMob.swift in Sources */,
 				5936696D2987A9E60087F66E /* AppColors.swift in Sources */,
 				59A6BA5E2987D49200418350 /* DetailTextScreen.swift in Sources */,
 				5936695A2987A7CB0087F66E /* CodecueChatGPTApp.swift in Sources */,
@@ -255,6 +273,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				"OTHER_LDFLAGS[arch=*]" = "-ObjC";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -325,6 +344,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"CodecueChatGPT/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CodecueChatGPT/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -353,6 +373,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"CodecueChatGPT/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CodecueChatGPT/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -419,6 +440,14 @@
 				kind = branch;
 			};
 		};
+		59EDAF142990E64C00266026 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -436,6 +465,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 595E998C298A2E81006475FE /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */;
 			productName = Shimmer;
+		};
+		59EDAF152990E64C00266026 /* GoogleMobileAds */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 59EDAF142990E64C00266026 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
+			productName = GoogleMobileAds;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

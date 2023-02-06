@@ -25,6 +25,9 @@ struct DetailTextScreen: View {
     @State private var isLoading = false
     @State private var showText : Bool = false
     @State var messageList : [QuestionAnswer] = []
+    
+    @EnvironmentObject var adVM: AdsViewModel
+
 
     var body: some View {
         
@@ -40,6 +43,8 @@ struct DetailTextScreen: View {
                         
                         Button(action: {
                             presentationMode.wrappedValue.dismiss()
+                            self.adVM.showInterstitial = true
+
                         }, label: {
                             Image(systemName: "chevron.backward")
                                 .resizable()
@@ -74,6 +79,7 @@ struct DetailTextScreen: View {
                                 ShimmerView(cornerRadius: 10, fill: .gray.opacity(0.5))
                                     .frame(width: (UIScreen.screenWidth-40), height: 140)
                                     .padding(.top,20)
+                                   
                                 
                             }
                             
@@ -93,6 +99,8 @@ struct DetailTextScreen: View {
                                         ForEach(self.messageList.indices, id:\.self){index in
                                             
                                             Message(questionAnswer: self.messageList[index])
+                                              
+                                                
                                             
                                         }
                                     }
@@ -143,7 +151,7 @@ struct DetailTextScreen: View {
                                         .foregroundColor(.white)
                                         .padding(.leading,5)
                                         .rotationEffect(self.qureytext != "" ? .degrees(0) : .degrees(40))
-
+                                       
                                 })
                                 .disabled(isLoading)
                             
@@ -152,6 +160,9 @@ struct DetailTextScreen: View {
                         }
                         
                     }
+                    
+                    
+                    
                     
                 }
                 .padding(.leading,20)

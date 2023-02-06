@@ -22,6 +22,8 @@ struct DetailImageScreen: View {
     @State private var imagesUrlsList  : [String] = []
     @State private var selectionImageInPreview = 0
    
+    @EnvironmentObject var adVM: AdsViewModel
+
 
     var body: some View {
         
@@ -58,76 +60,86 @@ struct DetailImageScreen: View {
                 .padding(.top,20)
                 
                 
-                if(self.isLoading){
-                    ScrollView(.vertical , showsIndicators: false){
-                        
-                        LazyVGrid(columns: [GridItem(.flexible()),GridItem(.flexible())]){
-                            
-                            ForEach(0...10, id:\.self){ index in
-                                
-                                ShimmerView(cornerRadius: 10, fill: .gray.opacity(0.5))
-                                    .frame(width: 150, height: 150)
-                                    .padding(.top,20)
-                                
-                            }
-                        }
-                    }
-                    .clipped()
+                VStack{
+                    Spacer()
+                    Text("Coming Soon")
+                        .foregroundColor(.white)
+                        .font(.title)
+                    Spacer()
                 }
-                else{
-                    
-                    ScrollView(.vertical, showsIndicators: false){
-                        if(!self.imageList.isEmpty){
-
-                            LazyVGrid(columns: [GridItem(.flexible()),GridItem(.flexible())]){
-                                
-                                ForEach(self.imageList.indices, id : \.self){index in
-                                    
-                                    ImagesCard(imageModel: self.imageList[index], showImageView: self.$showImageView, imagesUrlsList: self.$imagesUrlsList, selectionImageInPreview: self.$selectionImageInPreview )
-                                        
-                                }
-                            }
-                            
-                        }
-                       
-                        
-                    }
-                }
+                
+//                if(self.isLoading){
+//                    ScrollView(.vertical , showsIndicators: false){
+//
+//                        LazyVGrid(columns: [GridItem(.flexible()),GridItem(.flexible())]){
+//
+//                            ForEach(0...10, id:\.self){ index in
+//
+//                                ShimmerView(cornerRadius: 10, fill: .gray.opacity(0.5))
+//                                    .frame(width: 150, height: 150)
+//                                    .padding(.top,20)
+//
+//                            }
+//                        }
+//                    }
+//                    .clipped()
+//                }
+//                else{
+//
+//                    ScrollView(.vertical, showsIndicators: false){
+//                        if(!self.imageList.isEmpty){
+//
+//                            LazyVGrid(columns: [GridItem(.flexible()),GridItem(.flexible())]){
+//
+//                                ForEach(self.imageList.indices, id : \.self){index in
+//
+//                                    ImagesCard(imageModel: self.imageList[index], showImageView: self.$showImageView, imagesUrlsList: self.$imagesUrlsList, selectionImageInPreview: self.$selectionImageInPreview )
+//
+//
+//                                }
+//                            }
+//
+//                        }
+//
+//
+//                    }
+//                }
                
                 
-                HStack{
-                    TextField("Open AI Waiting for your query", text: $qureytext)
-                        .foregroundColor(AppColors.appBackgroundColor)
-                        .padding(15)
-                        .background(RoundedRectangle(cornerRadius: 10).fill(Color.white))
-                    
-                    
-                    if isLoading {
-                       ProgressView()
-                            .foregroundColor(.white)
-                            .padding(.leading,5)
-                    }else{
-                        
-                      
-                            Button(action: {
-                                generateImage(imageList: self.$imageList)
-                            }, label: {
-                                Image(systemName: "paperplane")
-                                    .resizable()
-                                    .aspectRatio( contentMode: .fit)
-                                    .frame(width: 24, height: 24)
-                                    .foregroundColor(.white)
-                                    .padding(.leading,5)
-                                    .rotationEffect(self.qureytext != "" ? .degrees(0) : .degrees(40))
-                            })
-                        
-                        
-                        
-                        
-                    }
-                  
-                    
-                }
+//                HStack{
+//                    TextField("Open AI Waiting for your query", text: $qureytext)
+//                        .foregroundColor(AppColors.appBackgroundColor)
+//                        .padding(15)
+//                        .background(RoundedRectangle(cornerRadius: 10).fill(Color.white))
+//
+//
+//                    if isLoading {
+//                       ProgressView()
+//                            .foregroundColor(.white)
+//                            .padding(.leading,5)
+//                    }else{
+//
+//
+//                            Button(action: {
+//                                generateImage(imageList: self.$imageList)
+//
+//                            }, label: {
+//                                Image(systemName: "paperplane")
+//                                    .resizable()
+//                                    .aspectRatio( contentMode: .fit)
+//                                    .frame(width: 24, height: 24)
+//                                    .foregroundColor(.white)
+//                                    .padding(.leading,5)
+//                                    .rotationEffect(self.qureytext != "" ? .degrees(0) : .degrees(40))
+//                            })
+//
+//
+//
+//
+//                    }
+//
+//
+//                }
                 
             }
             .padding(.leading,20)
