@@ -26,7 +26,7 @@ struct DetailTextScreen: View {
     @State private var showText : Bool = false
     @State var messageList : [QuestionAnswer] = []
     
-    @EnvironmentObject var adVM: AdsViewModel
+//    @EnvironmentObject var adVM: AdsViewModel
 
 
     var body: some View {
@@ -43,7 +43,7 @@ struct DetailTextScreen: View {
                         
                         Button(action: {
                             presentationMode.wrappedValue.dismiss()
-                            self.adVM.showInterstitial = true
+//                            self.adVM.showInterstitial = true
 
                         }, label: {
                             Image(systemName: "chevron.backward")
@@ -160,6 +160,10 @@ struct DetailTextScreen: View {
                         }
                         
                     }
+                    .padding(.bottom,5)
+                    
+                    BannerWrapper().frame(height: 50)
+
                     
                     
                     

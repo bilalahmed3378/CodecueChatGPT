@@ -37,13 +37,14 @@ struct HomeScreen: View {
                 Spacer()
                 
                 if(self.showButtons){
+                    
                     NavigationLink(destination: DetailTextScreen(), isActive: self.$toDetail){
                         EmptyView()
                     }
                     
                     Button(action: {
                         self.toDetail = true
-                        self.adVM.showInterstitial = true
+//                        self.adVM.showInterstitial = true
                     }, label: {
                         HStack{
                             Image(systemName: "text.bubble")
@@ -69,36 +70,44 @@ struct HomeScreen: View {
                     
                     
                     NavigationLink(destination: DetailImageScreen(), isActive: self.$toImageDetail){
-                        HStack{
-                            Image(systemName: "photo")
-                                .resizable()
-                                .aspectRatio( contentMode: .fit)
-                                .frame(width: 30, height: 30)
-                                .foregroundColor(.white)
-                                .padding(.leading,5)
-
-                            
-                            Text("Image Generation - OpenAI")
-                                .foregroundColor(.white)
-                                .padding(.leading,5)
-                            
-                            Spacer()
-                            
-                        }
-                        .padding()
-                        .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.appBackgroundColor).shadow(color: .black, radius: 10).opacity(0.5))
-                        .padding(.top,20)
+                        EmptyView()
                     }
-                  
+                        Button(action: {
+                            self.adVM.showInterstitial = true
+                            self.toImageDetail = true
+                        }, label: {
+                            HStack{
+                                Image(systemName: "photo")
+                                    .resizable()
+                                    .aspectRatio( contentMode: .fit)
+                                    .frame(width: 30, height: 30)
+                                    .foregroundColor(.white)
+                                    .padding(.leading,5)
+
+                                
+                                Text("Image Generation - OpenAI")
+                                    .foregroundColor(.white)
+                                    .padding(.leading,5)
+                                
+                                Spacer()
+                                
+                            }
+                            .padding()
+                            .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.appBackgroundColor).shadow(color: .black, radius: 10).opacity(0.5))
+                            .padding(.top,20)
+                        })
+                       
                     
+                  
+                    Spacer()
+
+                    BannerWrapper().frame(height: 50)
                   
                 
                 }
                    
 
-                Spacer()
-
-                BannerWrapper()
+              
 
              
                 
