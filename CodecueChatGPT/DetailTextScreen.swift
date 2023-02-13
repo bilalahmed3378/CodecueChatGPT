@@ -18,10 +18,13 @@ struct DetailTextScreen: View {
     @State var qureytext = ""
     @State private var copied = false
     @State private var dummyText = "dfdkjhgdflkjghdfgkljdhfgklfhsgkl"
-    @State private var showShareSheet = false
+    @State private var showShareSheet : Bool = false
     @State private var textToShare = "gldhjflgkjhflskgjdhfglkdjfhgldkf gfdgjhdfglkfhglkdfjh!"
     @State private var prompt = "Hello, how are you today?"
     @State private var generatedText = ""
+    @State private var textCopy : String = ""
+
+    
     @State private var isLoading = false
     @State private var showText : Bool = false
     @State var messageList : [QuestionAnswer] = []
@@ -71,24 +74,24 @@ struct DetailTextScreen: View {
                     .padding(.top,20)
                     .padding(.bottom,10)
                     
-                    if(self.isLoading){
-                        ScrollView(.vertical , showsIndicators: false){
-                            
-                            ForEach(0...10, id:\.self){ index in
-                                
-                                ShimmerView(cornerRadius: 10, fill: .gray.opacity(0.5))
-                                    .frame(width: (UIScreen.screenWidth-40), height: 140)
-                                    .padding(.top,20)
-                                   
-                                
-                            }
-                            
-                        }
-                        .clipped()
-                    }
+//                    if(self.isLoading){
+//                        ScrollView(.vertical , showsIndicators: false){
+//
+//                            ForEach(0...10, id:\.self){ index in
+//
+//                                ShimmerView(cornerRadius: 10, fill: .gray.opacity(0.5))
+//                                    .frame(width: (UIScreen.screenWidth-40), height: 140)
+//                                    .padding(.top,20)
+//
+//
+//                            }
+//
+//                        }
+//                        .clipped()
+//                    }
                     
                                         
-                    else{
+                 
                         
                         if(!self.messageList.isEmpty){
                             ScrollView(.vertical, showsIndicators: false){
@@ -123,7 +126,7 @@ struct DetailTextScreen: View {
                         }
                         
                         
-                    }
+                    
                   
                     
                     HStack{
@@ -141,6 +144,8 @@ struct DetailTextScreen: View {
                         }
                         else{
                             
+                            
+                            if(self.qureytext != ""){
                                 Button(action: generate, label: {
                                     
                                     
@@ -154,15 +159,25 @@ struct DetailTextScreen: View {
                                        
                                 })
                                 .disabled(isLoading)
+                            }
+                               
                             
-                                
+                            else{
+                                Image(systemName: "paperplane")
+                                    .resizable()
+                                    .aspectRatio( contentMode: .fit)
+                                    .frame(width: 24, height: 24)
+                                    .foregroundColor(.white)
+                                    .padding(.leading,5)
+                                    .rotationEffect(self.qureytext != "" ? .degrees(0) : .degrees(40))
+                            }
                               
                         }
                         
                     }
                     .padding(.bottom,5)
                     
-                    BannerWrapper().frame(height: 50)
+//                    BannerWrapper().frame(height: 50)
 
                     
                     
@@ -175,6 +190,7 @@ struct DetailTextScreen: View {
             
         }
         .navigationBarHidden(true)
+        
         
     }
     
@@ -205,10 +221,12 @@ struct DetailTextScreen: View {
 struct Message : View{
     
     @State private var copied = false
-    @State private var showShareSheet = false
+    @State private var showShareSheet : Bool = false
+
     @State private var generatedText = ""
     
     let questionAnswer : QuestionAnswer
+    
 
 
     var body: some View{
@@ -248,10 +266,12 @@ struct Message : View{
                         Button(action: {
                             self.showShareSheet = true
                         }, label: {
-                            ShareLink(item: self.questionAnswer.answer.text ?? ""){
-                                Label("", systemImage: "square.and.arrow.up")
-                                    .foregroundColor(AppColors.appBackgroundColor)
-                            }
+                         
+                            Image(systemName: "square.and.arrow.up")
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 16 , height: 16)
+                                .foregroundColor(AppColors.appBackgroundColor)
                         })
                     
                         
@@ -265,11 +285,9 @@ struct Message : View{
                                 Image(systemName: "doc.on.doc")
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
-                                    .frame(width: 20 , height: 20)
+                                    .frame(width: 16 , height: 16)
                                     .foregroundColor(AppColors.appBackgroundColor)
                                 
-                                Text("Copy..")
-                                    .foregroundColor(AppColors.appBackgroundColor)
                             }
                             
                             
@@ -292,9 +310,27 @@ struct Message : View{
             }
             
         }
+        .sheet(isPresented: $showShareSheet) {
+            ActivityView(activityItems: [self.questionAnswer.answer.text ?? ""])
+                }
        
     }
 }
+
+
+
+struct ActivityView: UIViewControllerRepresentable {
+    let activityItems: [Any]
+    func makeUIViewController(context: UIViewControllerRepresentableContext<ActivityView>) -> UIActivityViewController {
+        let controller = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
+        return controller
+    }
+
+    func updateUIViewController(_ uiViewController: UIActivityViewController, context: UIViewControllerRepresentableContext<ActivityView>) {
+
+    }
+}
+
 
 
 

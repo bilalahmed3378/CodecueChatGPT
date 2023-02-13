@@ -141,13 +141,16 @@ struct DetailImageScreen: View {
 //
 //                }
                 
+//                BannerWrapper().frame(height: 50)
+              
+                
             }
             .padding(.leading,20)
             .padding(.trailing,20)
             
-            ImageViewer(imageURLs: self.$imagesUrlsList, selected : self.$selectionImageInPreview  , viewerShown: self.$showImageView, caption: nil, closeButtonTopRight: true)
-            
-           
+//            ImageViewer(imageURLs: self.$imagesUrlsList, selected : self.$selectionImageInPreview  , viewerShown: self.$showImageView, caption: nil, closeButtonTopRight: true)
+
+         
         }
         .navigationBarHidden(true)
     }
@@ -177,7 +180,7 @@ struct DetailImageScreen: View {
                 }
                 
                 let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
-                           print(responseJSON)
+                print(responseJSON ?? "")
             }
             self.isLoading = false
         }.resume()
@@ -257,16 +260,16 @@ struct ImagesCard : View{
                 
                     HStack{
                         
-                        Button(action: {
-                            self.showShareSheet = true
-                            
-                        }, label: {
-                            ShareLink(item: self.imageModel.url){
-                                Label("", systemImage: "square.and.arrow.up")
-                                    .foregroundColor(.white)
-
-                            }
-                        })
+//                        Button(action: {
+//                            self.showShareSheet = true
+//                            
+//                        }, label: {
+//                            ShareLink(item: self.imageModel.url){
+//                                Label("", systemImage: "square.and.arrow.up")
+//                                    .foregroundColor(.white)
+//
+//                            }
+//                        })
                         
 //                        Button(action: {
 //
@@ -292,3 +295,5 @@ struct ImagesCard : View{
 //        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
 //    }
 }
+
+

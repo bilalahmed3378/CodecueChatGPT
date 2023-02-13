@@ -9,6 +9,7 @@ import SwiftUI
 import Foundation
 import GoogleMobileAds
 import UIKit
+import StoreKit
 
 struct HomeScreen: View {
     @State var description = ""
@@ -17,6 +18,9 @@ struct HomeScreen: View {
     @State var showButtons : Bool = false
 
     @EnvironmentObject var adVM: AdsViewModel
+    
+    @State private var showRecommended = false
+
 
 
     var body: some View {
@@ -64,6 +68,7 @@ struct HomeScreen: View {
                         }
                         .padding()
                         .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.appBackgroundColor).shadow(color: .black, radius: 10).opacity(0.5))
+                        .background(RoundedRectangle(cornerRadius: 10).stroke(.white,lineWidth: 1))
                     
                     })
                       
@@ -73,7 +78,6 @@ struct HomeScreen: View {
                         EmptyView()
                     }
                         Button(action: {
-                            self.adVM.showInterstitial = true
                             self.toImageDetail = true
                         }, label: {
                             HStack{
@@ -94,14 +98,22 @@ struct HomeScreen: View {
                             }
                             .padding()
                             .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.appBackgroundColor).shadow(color: .black, radius: 10).opacity(0.5))
+                            .background(RoundedRectangle(cornerRadius: 10).stroke(.white,lineWidth: 1))
                             .padding(.top,20)
                         })
                        
                     
                   
                     Spacer()
+                    
+                   
+//                    Link("View more Apps", destination: URL(string: "https://apps.apple.com/app-id")!)
+//                        .foregroundColor(.white)
+//                        .padding(.bottom,20)
 
-                    BannerWrapper().frame(height: 50)
+                  
+
+//                    BannerWrapper().frame(height: 50)
                   
                 
                 }
@@ -135,7 +147,7 @@ struct HomeScreen: View {
 
 struct OpenAIAPI {
     static let endpoint = "https://api.openai.com/v1/completions"
-    static let apiKey = "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"
+    static let apiKey = "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"
 }
 
 struct Choice : Codable, Hashable{
@@ -263,13 +275,13 @@ func generateText(prompt: String, completion: @escaping (Result<String, Error>) 
 final private class BannerVC: UIViewControllerRepresentable  {
 
     func makeUIViewController(context: Context) -> UIViewController {
-        let view = GADBannerView(adSize: GADPortraitAnchoredAdaptiveBannerAdSizeWithWidth(320))
+        let view = GADBannerView(adSize: GADPortraitAnchoredAdaptiveBannerAdSizeWithWidth(.infinity))
 
         let viewController = UIViewController()
         view.adUnitID = "ca-app-pub-3940256099942544/2934735716"
         view.rootViewController = viewController
         viewController.view.addSubview(view)
-        viewController.view.frame = CGRect(origin: .zero, size: GADPortraitAnchoredAdaptiveBannerAdSizeWithWidth(320).size)
+        viewController.view.frame = CGRect(origin: .zero, size: GADPortraitAnchoredAdaptiveBannerAdSizeWithWidth(.infinity).size)
         view.load(GADRequest())
 
         return viewController
