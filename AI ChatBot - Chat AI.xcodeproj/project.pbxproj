@@ -27,7 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		593669562987A7CB0087F66E /* CodecueChatGPT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CodecueChatGPT.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		593669562987A7CB0087F66E /* AI ChatBot - Chat AI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AI ChatBot - Chat AI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		593669592987A7CB0087F66E /* CodecueChatGPTApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodecueChatGPTApp.swift; sourceTree = "<group>"; };
 		5936695B2987A7CB0087F66E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		5936695D2987A7CF0087F66E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -70,7 +70,7 @@
 		593669572987A7CB0087F66E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				593669562987A7CB0087F66E /* CodecueChatGPT.app */,
+				593669562987A7CB0087F66E /* AI ChatBot - Chat AI.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -123,9 +123,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		593669552987A7CB0087F66E /* CodecueChatGPT */ = {
+		593669552987A7CB0087F66E /* AI ChatBot - Chat AI */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 593669642987A7CF0087F66E /* Build configuration list for PBXNativeTarget "CodecueChatGPT" */;
+			buildConfigurationList = 593669642987A7CF0087F66E /* Build configuration list for PBXNativeTarget "AI ChatBot - Chat AI" */;
 			buildPhases = (
 				593669522987A7CB0087F66E /* Sources */,
 				593669532987A7CB0087F66E /* Frameworks */,
@@ -135,7 +135,7 @@
 			);
 			dependencies = (
 			);
-			name = CodecueChatGPT;
+			name = "AI ChatBot - Chat AI";
 			packageProductDependencies = (
 				593064C12988340D0065ED20 /* Alamofire */,
 				594687252988FF1300D93B5D /* Kingfisher */,
@@ -143,7 +143,7 @@
 				59EDAF152990E64C00266026 /* GoogleMobileAds */,
 			);
 			productName = CodecueChatGPT;
-			productReference = 593669562987A7CB0087F66E /* CodecueChatGPT.app */;
+			productReference = 593669562987A7CB0087F66E /* AI ChatBot - Chat AI.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -161,7 +161,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 593669512987A7CB0087F66E /* Build configuration list for PBXProject "CodecueChatGPT" */;
+			buildConfigurationList = 593669512987A7CB0087F66E /* Build configuration list for PBXProject "AI ChatBot - Chat AI" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -180,7 +180,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				593669552987A7CB0087F66E /* CodecueChatGPT */,
+				593669552987A7CB0087F66E /* AI ChatBot - Chat AI */,
 			);
 		};
 /* End PBXProject section */
@@ -398,7 +398,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		593669512987A7CB0087F66E /* Build configuration list for PBXProject "CodecueChatGPT" */ = {
+		593669512987A7CB0087F66E /* Build configuration list for PBXProject "AI ChatBot - Chat AI" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				593669622987A7CF0087F66E /* Debug */,
@@ -407,7 +407,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		593669642987A7CF0087F66E /* Build configuration list for PBXNativeTarget "CodecueChatGPT" */ = {
+		593669642987A7CF0087F66E /* Build configuration list for PBXNativeTarget "AI ChatBot - Chat AI" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				593669652987A7CF0087F66E /* Debug */,
