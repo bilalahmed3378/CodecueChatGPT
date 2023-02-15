@@ -74,34 +74,34 @@ struct HomeScreen: View {
                       
                     
                     
-                    NavigationLink(destination: DetailImageScreen(), isActive: self.$toImageDetail){
-                        EmptyView()
-                    }
-                        Button(action: {
-                            self.toImageDetail = true
-                        }, label: {
-                            HStack{
-                                Image(systemName: "photo")
-                                    .resizable()
-                                    .aspectRatio( contentMode: .fit)
-                                    .frame(width: 30, height: 30)
-                                    .foregroundColor(.white)
-                                    .padding(.leading,5)
-
-                                
-                                Text("Image Generation - OpenAI")
-                                    .foregroundColor(.white)
-                                    .padding(.leading,5)
-                                
-                                Spacer()
-                                
-                            }
-                            .padding()
-                            .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.appBackgroundColor).shadow(color: .black, radius: 10).opacity(0.5))
-                            .background(RoundedRectangle(cornerRadius: 10).stroke(.white,lineWidth: 1))
-                            .padding(.top,20)
-                        })
-                       
+//                    NavigationLink(destination: DetailImageScreen(), isActive: self.$toImageDetail){
+//                        EmptyView()
+//                    }
+//                        Button(action: {
+//                            self.toImageDetail = true
+//                        }, label: {
+//                            HStack{
+//                                Image(systemName: "photo")
+//                                    .resizable()
+//                                    .aspectRatio( contentMode: .fit)
+//                                    .frame(width: 30, height: 30)
+//                                    .foregroundColor(.white)
+//                                    .padding(.leading,5)
+//
+//
+//                                Text("Image Generation - OpenAI")
+//                                    .foregroundColor(.white)
+//                                    .padding(.leading,5)
+//
+//                                Spacer()
+//
+//                            }
+//                            .padding()
+//                            .background(RoundedRectangle(cornerRadius: 10).fill(AppColors.appBackgroundColor).shadow(color: .black, radius: 10).opacity(0.5))
+//                            .background(RoundedRectangle(cornerRadius: 10).stroke(.white,lineWidth: 1))
+//                            .padding(.top,20)
+//                        })
+//
                     
                   
                     Spacer()
