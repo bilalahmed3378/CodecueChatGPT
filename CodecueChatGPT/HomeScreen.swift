@@ -59,7 +59,7 @@ struct HomeScreen: View {
                                 .padding(.leading,5)
 
                             
-                            Text("Text Completion - OpenAI")
+                            Text("Text Completion - AI Chat")
                                 .foregroundColor(.white)
                                 .padding(.leading,5)
                             

@@ -58,7 +58,7 @@ struct DetailTextScreen: View {
                         
                         Spacer()
                         
-                        Text("Chat GPT")
+                        Text("AI Chat")
                             .foregroundColor(.white)
                         
                         Spacer()
@@ -131,7 +131,7 @@ struct DetailTextScreen: View {
                     
                     HStack{
                         
-                        TextField("Open AI Waiting for your query", text: $qureytext)
+                        TextField("Type Something", text: $qureytext)
                             .foregroundColor(AppColors.appBackgroundColor)
                             .padding(15)
                             .background(RoundedRectangle(cornerRadius: 10).fill(Color.white))
