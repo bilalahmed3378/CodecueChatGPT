@@ -41,6 +41,11 @@ struct DetailTextScreen: View {
             
            
                 VStack{
+                    
+                    BannerWrapper().frame( height: 50)
+                        .padding(.top,5)
+
+
                     // top bar
                     HStack{
                         
@@ -71,7 +76,7 @@ struct DetailTextScreen: View {
                         
                         
                     }
-                    .padding(.top,20)
+                    .padding(.top,5)
                     .padding(.bottom,10)
                     
 //                    if(self.isLoading){
@@ -90,8 +95,7 @@ struct DetailTextScreen: View {
 //                        .clipped()
 //                    }
                     
-                                        
-                 
+
                         
                         if(!self.messageList.isEmpty){
                             ScrollView(.vertical, showsIndicators: false){
@@ -116,6 +120,7 @@ struct DetailTextScreen: View {
                             .rotationEffect(.degrees(180))
                         }
                         else{
+                            
                             Spacer()
                             Image(uiImage: UIImage(named: AppImages.appLogo)!)
                                 .resizable()
@@ -175,9 +180,9 @@ struct DetailTextScreen: View {
                         }
                         
                     }
-                    .padding(.bottom,5)
+                    .padding(.bottom,10)
                     
-//                    BannerWrapper().frame(height: 50)
+                    
 
                     
                     
