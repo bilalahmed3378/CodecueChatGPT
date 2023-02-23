@@ -311,7 +311,7 @@ struct BannerWrapper: UIViewControllerRepresentable {
         let viewController = UIViewController()
         let bannerView = GADBannerView(adSize: GADPortraitAnchoredAdaptiveBannerAdSizeWithWidth(340))
         addBannerViewToView(bannerView, viewController: viewController)
-        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bannerView.adUnitID = "ca-app-pub-7540620933217632/6763954948"
         bannerView.rootViewController = viewController
         bannerView.load(GADRequest())
         return viewController

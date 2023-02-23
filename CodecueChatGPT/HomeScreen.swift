@@ -113,7 +113,7 @@ struct HomeScreen: View {
 
                   
 
-//                    BannerWrapper().frame(height: 50)
+                    BannerWrapper().frame(height: 50)
                   
                 
                 }
