@@ -246,7 +246,7 @@ import UIKit
 class AdsManager: NSObject, ObservableObject {
     
     private struct AdMobConstant {
-        static let interstitial1ID = "ca-app-pub-3940256099942544/4411468910"
+        static let interstitial1ID = "ca-app-pub-3940256099942544/1033173712"
     }
     
     final class Interstitial: NSObject, GADFullScreenContentDelegate, ObservableObject {
@@ -301,6 +301,9 @@ class AdsViewModel: ObservableObject {
         }
     }
 }
+
+
+
 
 
 

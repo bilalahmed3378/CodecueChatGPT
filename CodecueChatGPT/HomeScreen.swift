@@ -17,8 +17,9 @@ struct HomeScreen: View {
     @State var toImageDetail : Bool = false
     @State var showButtons : Bool = false
 
-    @EnvironmentObject var adVM: AdsViewModel
-    
+//    @EnvironmentObject var adVM: AdsViewModel
+    @State var interstitial: GADInterstitialAd?
+
     @State private var showRecommended = false
 
 
@@ -48,7 +49,8 @@ struct HomeScreen: View {
                     
                     Button(action: {
                         self.toDetail = true
-                        self.adVM.showInterstitial = true
+                        interstitial?.present(fromRootViewController: UIApplication.shared.windows.first?.rootViewController ?? UIViewController())
+
                     }, label: {
                         HStack{
                             Image(systemName: "text.bubble")
@@ -138,7 +140,23 @@ struct HomeScreen: View {
                     }
                 }
             })
+            
+            
         }
+        .onAppear(perform: {
+                    let request = GADRequest()
+                            GADInterstitialAd.load(withAdUnitID:"ca-app-pub-7540620933217632/7261281419",
+                                                        request: request,
+                                              completionHandler: { [self] ad, error in
+                                if error != nil {
+                                                  return
+                                                }
+                                                interstitial = ad
+                                interstitial?.fullScreenContentDelegate = [self] as? any GADFullScreenContentDelegate
+                                              }
+                            )
+
+                })
        
 
     }

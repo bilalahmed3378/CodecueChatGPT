@@ -7,6 +7,7 @@
 
 import SwiftUI
 import UIKit
+import GoogleMobileAds
 
 struct QuestionAnswer : Hashable {
     let question : String
@@ -23,6 +24,7 @@ struct DetailTextScreen: View {
     @State private var prompt = "Hello, how are you today?"
     @State private var generatedText = ""
     @State private var textCopy : String = ""
+
 
     
     @State private var isLoading = false
@@ -51,7 +53,7 @@ struct DetailTextScreen: View {
                         
                         Button(action: {
                             presentationMode.wrappedValue.dismiss()
-//                            self.adVM.showInterstitial = true
+                           
 
                         }, label: {
                             Image(systemName: "chevron.backward")
@@ -195,7 +197,8 @@ struct DetailTextScreen: View {
             
         }
         .navigationBarHidden(true)
-        
+      
+      
         
     }
     

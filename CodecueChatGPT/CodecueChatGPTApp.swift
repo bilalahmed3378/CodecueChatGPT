@@ -8,14 +8,17 @@
 import SwiftUI
 import GoogleMobileAds
 
+
+
 @main
 struct CodecueChatGPTApp: App {
-    let adsVM = AdsViewModel.shared
+//    let adsVM = AdsViewModel.shared
+     
 
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(adsVM)
+//                .environmentObject(adsVM)
 
         }
     }
@@ -25,7 +28,7 @@ struct CodecueChatGPTApp: App {
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication,
-                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         GADMobileAds.sharedInstance().start(completionHandler: nil)
 
