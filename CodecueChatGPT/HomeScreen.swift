@@ -48,7 +48,7 @@ struct HomeScreen: View {
                     
                     Button(action: {
                         self.toDetail = true
-//                        self.adVM.showInterstitial = true
+                        self.adVM.showInterstitial = true
                     }, label: {
                         HStack{
                             Image(systemName: "text.bubble")
@@ -278,7 +278,7 @@ final private class BannerVC: UIViewControllerRepresentable  {
         let view = GADBannerView(adSize: GADPortraitAnchoredAdaptiveBannerAdSizeWithWidth(.infinity))
 
         let viewController = UIViewController()
-        view.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        view.adUnitID = "ca-app-pub-7540620933217632/6763954948"
         view.rootViewController = viewController
         viewController.view.addSubview(view)
         viewController.view.frame = CGRect(origin: .zero, size: GADPortraitAnchoredAdaptiveBannerAdSizeWithWidth(.infinity).size)
@@ -289,3 +289,28 @@ final private class BannerVC: UIViewControllerRepresentable  {
 
     func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
 }
+
+
+struct BannerWrapper: UIViewControllerRepresentable {
+    func makeUIViewController(context: UIViewControllerRepresentableContext<BannerWrapper>) -> UIViewController {
+        let viewController = UIViewController()
+        let bannerView = GADBannerView(adSize: GADPortraitAnchoredAdaptiveBannerAdSizeWithWidth(340))
+        addBannerViewToView(bannerView, viewController: viewController)
+        bannerView.adUnitID = "ca-app-pub-7540620933217632/6763954948"
+        bannerView.rootViewController = viewController
+        bannerView.load(GADRequest())
+        return viewController
+    }
+    
+    func updateUIViewController(_ uiViewController: UIViewController, context: UIViewControllerRepresentableContext<BannerWrapper>) {
+    }
+    
+    private func addBannerViewToView(_ bannerView: GADBannerView, viewController: UIViewController) {
+        bannerView.translatesAutoresizingMaskIntoConstraints = false
+        viewController.view.addSubview(bannerView)
+        viewController.view.centerXAnchor.constraint(equalTo: bannerView.centerXAnchor).isActive = true
+        viewController.view.bottomAnchor.constraint(equalTo: bannerView.bottomAnchor).isActive = true
+    }
+}
+
+

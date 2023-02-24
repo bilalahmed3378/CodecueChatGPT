@@ -306,26 +306,3 @@ class AdsViewModel: ObservableObject {
 
 
 
-struct BannerWrapper: UIViewControllerRepresentable {
-    func makeUIViewController(context: UIViewControllerRepresentableContext<BannerWrapper>) -> UIViewController {
-        let viewController = UIViewController()
-        let bannerView = GADBannerView(adSize: GADPortraitAnchoredAdaptiveBannerAdSizeWithWidth(340))
-        addBannerViewToView(bannerView, viewController: viewController)
-        bannerView.adUnitID = "ca-app-pub-7540620933217632/6763954948"
-        bannerView.rootViewController = viewController
-        bannerView.load(GADRequest())
-        return viewController
-    }
-    
-    func updateUIViewController(_ uiViewController: UIViewController, context: UIViewControllerRepresentableContext<BannerWrapper>) {
-    }
-    
-    private func addBannerViewToView(_ bannerView: GADBannerView, viewController: UIViewController) {
-        bannerView.translatesAutoresizingMaskIntoConstraints = false
-        viewController.view.addSubview(bannerView)
-        viewController.view.centerXAnchor.constraint(equalTo: bannerView.centerXAnchor).isActive = true
-        viewController.view.bottomAnchor.constraint(equalTo: bannerView.bottomAnchor).isActive = true
-    }
-}
-
-
