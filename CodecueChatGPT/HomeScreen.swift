@@ -16,6 +16,8 @@ struct HomeScreen: View {
     @State var toDetail : Bool = false
     @State var toImageDetail : Bool = false
     @State var showButtons : Bool = false
+    
+   
 
 //    @EnvironmentObject var adVM: AdsViewModel
     @State var interstitial: GADInterstitialAd?

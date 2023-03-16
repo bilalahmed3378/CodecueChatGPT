@@ -14,6 +14,8 @@ import GoogleMobileAds
 struct CodecueChatGPTApp: App {
 //    let adsVM = AdsViewModel.shared
      
+//    @Environment(\.scenePhase) private var scenePhase
+//       var ad = OpenAd()
 
     var body: some Scene {
         WindowGroup {
@@ -21,6 +23,11 @@ struct CodecueChatGPTApp: App {
 //                .environmentObject(adsVM)
 
         }
+//        .onChange(of: scenePhase) { phase in
+//                   if phase == .active {
+//                       ad.tryToPresentAd()
+//                   }
+//               }
     }
 }
 
