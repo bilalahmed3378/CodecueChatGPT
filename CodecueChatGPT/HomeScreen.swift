@@ -17,14 +17,15 @@ struct HomeScreen: View {
     @State var toImageDetail : Bool = false
     @State var showButtons : Bool = false
     
+    var ad = OpenAd()
    
-
-//    @EnvironmentObject var adVM: AdsViewModel
+    
     @State var interstitial: GADInterstitialAd?
 
     @State private var showRecommended = false
 
-
+    @State var isLoadingFirstTime = true
+    
 
     var body: some View {
         ZStack{
@@ -143,7 +144,9 @@ struct HomeScreen: View {
                 }
             })
             
-            
+                
+                ad.tryToPresentAd()
+                
         }
         .onAppear(perform: {
                     let request = GADRequest()
