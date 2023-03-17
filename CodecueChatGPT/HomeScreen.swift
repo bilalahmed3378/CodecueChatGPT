@@ -52,7 +52,7 @@ struct HomeScreen: View {
                     
                     Button(action: {
                         self.toDetail = true
-                        interstitial?.present(fromRootViewController: UIApplication.shared.windows.first?.rootViewController ?? UIViewController())
+
 
                     }, label: {
                         HStack{
@@ -146,6 +146,8 @@ struct HomeScreen: View {
             
                 
                 ad.tryToPresentAd()
+            
+            interstitial?.present(fromRootViewController: UIApplication.shared.windows.first?.rootViewController ?? UIViewController())
                 
         }
         .onAppear(perform: {

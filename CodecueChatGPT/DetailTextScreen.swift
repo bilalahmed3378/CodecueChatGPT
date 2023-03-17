@@ -44,8 +44,8 @@ struct DetailTextScreen: View {
            
                 VStack{
                     
-                    BannerWrapper().frame( height: 50)
-                        .padding(.top,5)
+//                    BannerWrapper().frame( height: 50)
+//                        .padding(.top,5)
 
 
                     // top bar
