@@ -4,7 +4,7 @@
 //
 //  Created by Bilal Ahmed on 30/01/2023.
 //
-
+//
 //import SwiftUI
 //import UIKit
 //import Foundation
@@ -258,27 +258,27 @@
 //                
 //                    HStack{
 //                        
-////                        Button(action: {
-////                            self.showShareSheet = true
-////                            
-////                        }, label: {
-////                            ShareLink(item: self.imageModel.url){
-////                                Label("", systemImage: "square.and.arrow.up")
-////                                    .foregroundColor(.white)
-////
-////                            }
-////                        })
+//                       Button(action: {
+//                           self.showShareSheet = true
+//
+//                       }, label: {
+//                           ShareLink(item: self.imageModel.url){
+//                               Label("", systemImage: "square.and.arrow.up")
+//                                   .foregroundColor(.white)
+//
+//                           }
+//                        })
 //                        
-////                        Button(action: {
-////
-////                        }, label: {
-////                            Image(systemName: "square.and.arrow.down")
-////                                .resizable()
-////                                .aspectRatio(contentMode: .fill)
-////                                .frame(width: 20 , height: 20)
-////                                .foregroundColor(.white)
-////
-////                        })
+//                        Button(action: {
+//
+//                        }, label: {
+//                           Image(systemName: "square.and.arrow.down")
+//                                .resizable()
+//                                .aspectRatio(contentMode: .fill)
+//                               .frame(width: 20 , height: 20)
+//                               .foregroundColor(.white)
+//
+//                        })
 //                       
 //                    }
 //                    

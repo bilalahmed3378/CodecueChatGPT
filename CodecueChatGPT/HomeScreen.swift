@@ -172,7 +172,7 @@ struct HomeScreen: View {
 
 struct OpenAIAPI {
     static let endpoint = "https://api.openai.com/v1/completions"
-    static let apiKey = "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"
+    static let apiKey = "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"
 }
 
 struct Choice : Codable, Hashable{
